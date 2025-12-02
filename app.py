@@ -494,7 +494,7 @@ elif st.session_state.page == 'result':
     with c2:
         st.markdown("### 🖼️ 未來空間想像")
         # 這裡用假圖示意，若有 DALL-E 可直接換成生成的 URL
-        st.image("[https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop](https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop)", 
+        st.image("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop", 
                  caption="AI Concept Art", use_container_width=True)
         
         st.success("喜歡這個提案嗎？")
@@ -503,4 +503,5 @@ elif st.session_state.page == 'result':
         
         if st.button("🔄 重新測驗"):
             st.session_state.page = 'quiz'
+
             st.rerun()
