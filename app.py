@@ -320,6 +320,7 @@ def generate_consultation(user_input, api_key=None):
         </div>
     </div>
     
+    <!-- IMAGE_PROMPT: [在此填入給 Midjourney 用的英文 Prompt, 8k, photorealistic] -->
     """
 
     # 模擬模式
@@ -353,6 +354,7 @@ def generate_consultation(user_input, api_key=None):
                 </div>
             </div>
         </div>
+        <!-- IMAGE_PROMPT: Photorealistic interior photography of a warm Scandinavian kitchen... -->
         """
 
     # 真實 AI 模式
@@ -478,4 +480,27 @@ elif st.session_state.page == 'result':
         
         # 分離 Image Prompt
         if "IMAGE_PROMPT:" in full_response:
-            html_content = full_response.split("
+            html_content = full_response.split("<!-- IMAGE_PROMPT:")[0]
+        else:
+            html_content = full_response
+
+    # 結果呈現 (左文右圖)
+    c1, c2 = st.columns([1.5, 1])
+    
+    with c1:
+        # 重點：開啟 HTML 渲染功能
+        st.markdown(html_content, unsafe_allow_html=True)
+    
+    with c2:
+        st.markdown("### 🖼️ 未來空間想像")
+        # 這裡用假圖示意，若有 DALL-E 可直接換成生成的 URL
+        st.image("[https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop](https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop)", 
+                 caption="AI Concept Art", use_container_width=True)
+        
+        st.success("喜歡這個提案嗎？")
+        st.button("📅 預約森經理免費諮詢", type="primary", use_container_width=True)
+        st.button("💬 加入官方 LINE 討論", use_container_width=True)
+        
+        if st.button("🔄 重新測驗"):
+            st.session_state.page = 'quiz'
+            st.rerun()
